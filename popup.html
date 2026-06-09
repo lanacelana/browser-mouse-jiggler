@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+    :root {
+      --bg-main: #0b2114;         /* Hijau hutan sangat gelap (hampir hitam) untuk latar belakang utama */
+      --bg-item: #1a4d2e;         /* Hijau hutan gelap untuk kartu/item daftar */
+      --border-item: #2c6a43;     /* Hijau hutan sedang untuk border/garis tepi */
+      --accent-gold: #dfff00;     /* Kuning stabilo / acid lime untuk aksen utama & highlight */
+      --text-light: #f2ffe5;      /* Putih-lime lembut untuk teks utama */
+      --text-muted: #7fa38a;      /* Hijau sage pudar untuk teks sekunder/deskripsi */
+      --btn-clear-bg: #8b2635;    /* Merah mawar gelap untuk aksi bahaya/bersihkan */
+      --btn-success-bg: #2d6a4f;  /* Hijau hutan terang untuk tanda sukses */
+    }
 
     body {
       width: 250px;
       padding: 16px;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background: #0f172a;
-      color: #f8fafc;
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-main);
+      color: var(--text-light);
       margin: 0;
       box-sizing: border-box;
     }
@@ -18,23 +28,21 @@
       font-size: 16px;
       font-weight: 700;
       text-align: center;
-      background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--accent-gold);
       letter-spacing: -0.3px;
     }
     .status-box {
       padding: 12px;
       border-radius: 10px;
       margin-bottom: 14px;
-      background: rgba(30, 41, 59, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: var(--bg-item);
+      border: 1px solid var(--border-item);
       text-align: center;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
     .tab-info {
       font-size: 10px;
-      color: #94a3b8;
+      color: var(--text-muted);
       margin-bottom: 4px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -51,7 +59,7 @@
       display: block;
       font-size: 10px;
       font-weight: 600;
-      color: #94a3b8;
+      color: var(--text-muted);
       margin-bottom: 6px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -59,74 +67,130 @@
     select, input {
       width: 100%;
       padding: 8px 10px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: #1e293b;
-      color: #f8fafc;
+      border: 1px solid var(--border-item);
+      background: var(--bg-item);
+      color: var(--text-light);
       border-radius: 6px;
       font-size: 12px;
       font-family: inherit;
       box-sizing: border-box;
-      transition: all 0.2s ease;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+    input {
+      cursor: text;
+    }
+    select:hover, input:hover {
+      border-color: var(--accent-gold);
+      background: rgba(26, 77, 46, 0.85);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
     select:focus, input:focus {
       outline: none;
-      border-color: #818cf8;
-      box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.2);
+      border-color: var(--accent-gold);
+      background: var(--bg-item);
+      transform: translateY(0);
+      box-shadow: 0 0 0 3px rgba(223, 255, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.3);
     }
     button {
       width: 100%;
       padding: 10px;
       cursor: pointer;
       border-radius: 6px;
-      border: none;
-      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
-      color: white;
+      border: 1px solid var(--border-item);
+      background: var(--btn-success-bg);
+      color: var(--text-light);
       font-weight: 600;
       font-size: 12px;
       font-family: inherit;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
     button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 14px rgba(99, 102, 241, 0.4);
+      transform: translateY(-2px);
+      filter: brightness(1.15);
+      box-shadow: 0 6px 14px rgba(45, 106, 79, 0.4), 0 2px 4px rgba(0, 0, 0, 0.2);
     }
     button:active {
-      transform: translateY(1px);
+      transform: translateY(1px) scale(0.97);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
     button.active {
-      background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
-      box-shadow: 0 4px 10px rgba(244, 63, 94, 0.3);
+      background: var(--btn-clear-bg);
+      border-color: var(--btn-clear-bg);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
     button.active:hover {
-      box-shadow: 0 6px 14px rgba(244, 63, 94, 0.4);
+      box-shadow: 0 6px 14px rgba(139, 38, 53, 0.4), 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .status-box {
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 14px;
+      background: var(--bg-item);
+      border: 1px solid var(--border-item);
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+    .status-box.active {
+      border-color: var(--accent-gold);
+      animation: pulse-glow 2s infinite ease-in-out;
+    }
+    @keyframes pulse-glow {
+      0% {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3), 0 0 0 0px rgba(223, 255, 0, 0.2);
+      }
+      50% {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3), 0 0 8px 4px rgba(223, 255, 0, 0.3);
+      }
+      100% {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3), 0 0 0 0px rgba(223, 255, 0, 0.2);
+      }
+    }
+    .footer {
+      margin-top: 14px;
+      font-size: 8px;
+      text-align: center;
+      color: var(--text-muted);
+      opacity: 0.6;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: all 0.25s ease;
+    }
+    .footer:hover {
+      opacity: 1;
+      color: var(--accent-gold);
     }
   </style>
 </head>
 <body>
-  <h3>Tab Jiggler v1.2.0</h3>
+  <h3>Tab Jiggler Mate v1.2.0</h3>
   <div class="status-box">
-    <div class="tab-info">Current Tab Status:</div>
-    <div id="stateText">Checking...</div>
+    <div class="tab-info">How's the tab lookin'?</div>
+    <div id="stateText" class="inactive">Checkin'...</div>
   </div>
   
   <div class="setting">
-    <label>Interval (Seconds)</label>
+    <label>Jiggle interval</label>
     <select id="intervalSelect">
-      <option value="random" selected>Random (2 - 7 Seconds)</option>
-      <option value="2000">2 Seconds</option>
-      <option value="3000">3 Seconds</option>
-      <option value="4000">4 Seconds</option>
-      <option value="5000">5 Seconds</option>
+      <option value="random" selected>Rando (2 - 7s)</option>
+      <option value="2000">2 secs</option>
+      <option value="3000">3 secs</option>
+      <option value="4000">4 secs</option>
+      <option value="5000">5 secs</option>
     </select>
   </div>
 
   <div class="setting">
-    <label>Custom Image URL</label>
-    <input type="text" id="imgUrl" placeholder="Optional URL">
+    <label>Custom cursor pic URL</label>
+    <input type="text" id="imgUrl" placeholder="Chuck a link here (optional)">
   </div>
 
-  <button id="toggleBtn">Enable for this Tab</button>
+  <button id="toggleBtn">Give it a go, mate!</button>
+
+  <div class="footer">by lncln</div>
 
   <script src="popup.js"></script>
 </body>

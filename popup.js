@@ -2,6 +2,7 @@ const toggleBtn = document.getElementById('toggleBtn');
 const stateText = document.getElementById('stateText');
 const intervalSelect = document.getElementById('intervalSelect');
 const imgUrlInput = document.getElementById('imgUrl');
+const statusBox = document.querySelector('.status-box');
 
 // 1. Find the current active tab
 chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -45,8 +46,15 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 });
 
 function updateUI(isEnabled) {
-  stateText.innerText = isEnabled ? "JIGGLING ACTIVE" : "INACTIVE";
-  stateText.style.color = isEnabled ? "#34d399" : "#f87171";
-  toggleBtn.innerText = isEnabled ? "Stop Jiggling This Tab" : "Start Jiggling This Tab";
+  stateText.innerText = isEnabled ? "JIGGLIN' AWAY!" : "NO JIGGLE, MATE";
+  stateText.style.color = isEnabled ? "var(--accent-gold)" : "var(--text-muted)";
+  toggleBtn.innerText = isEnabled ? "Whoa, stop jiggling!" : "Give it a go, mate!";
   toggleBtn.className = isEnabled ? "active" : "";
+  if (statusBox) {
+    if (isEnabled) {
+      statusBox.classList.add('active');
+    } else {
+      statusBox.classList.remove('active');
+    }
+  }
 }
